@@ -1,0 +1,220 @@
+from queries import (
+    get_vaults_query,
+)
+import json
+import requests
+import pandas as pd 
+from datetime import datetime, timedelta
+import time
+
+MORPHO_GRAPHQL_API = "https://api.morpho.org/graphql"
+
+def query_aave_graphql(query):
+    headers = {
+        'Content-Type': 'application/json',
+    }
+    
+    response = requests.post(
+        MORPHO_GRAPHQL_API,
+        json={'query': query},
+        headers=headers
+    )
+    
+    if response.status_code == 200:
+        # print(response.json())
+        return response.json()
+    else:
+        raise Exception(f"Query failed with status {response.status_code}: {response.text}")
+
+VALUTS_QUERY = """
+query {
+  vaults(first: 500, skip: $skip$, where: {
+    chainId_in: [1, 8453],
+    listed: true,
+  }) {
+    items {
+      address
+      symbol
+      name
+      asset {
+        id
+        address
+        decimals
+        symbol
+      }
+      chain {
+        id
+        network
+      }
+    }
+  }
+}
+
+"""
+
+# valuts_data = {
+#     "address": [],
+#     "symbol": [],
+#     "name": [],
+#     "asset_address": [],
+#     "asset_symbol": [],
+#     "asset_decimals": [],
+#     "network": [],
+# }
+
+# skip=0
+# while 1:
+#     res = query_aave_graphql(VALUTS_QUERY.replace("$skip$", str(skip)))["data"]["vaults"]["items"]
+#     if len(res) == 0:
+#         break
+#     skip += len(res)
+#     print("processing", skip)
+
+#     for item in res:
+#         valuts_data["address"].append(item["address"])
+#         valuts_data["symbol"].append(item["symbol"])
+#         valuts_data["name"].append(item["name"])
+#         valuts_data["network"].append("eth" if item["chain"]["id"] == 1 else "base")
+#         valuts_data["asset_address"].append(item["asset"]["id"])
+#         valuts_data["asset_symbol"].append(item["asset"]["symbol"])
+#         valuts_data["asset_decimals"].append(item["asset"]["decimals"])
+
+
+# valuts_data = pd.DataFrame(valuts_data)
+# print("PROCESSED VAULTS")
+# valuts_data.to_csv("./data/common/vaults_meta.csv", index=False)
+
+
+
+MARKETS_QUERY = """
+query {
+  markets(first: 100, skip: $skip$, where: {
+    chainId_in: [1, 8453],
+  }) {
+    items {
+      uniqueKey
+      lltv
+      creationTimestamp,
+      oracle {
+        address
+      }
+      irmAddress
+      currentIrmCurve {
+        utilization
+        borrowApy
+        supplyApy
+      }
+      loanAsset {
+        address
+        symbol
+        decimals
+        chain {
+            id
+        }
+      }
+      collateralAsset {
+        address
+        symbol
+        decimals
+      }
+    }
+  }
+}
+"""
+
+# markets_data = {
+#     "address": [],
+#     "lltv": [],
+#     "oracle_address": [],
+#     "creation_datetime": [],
+#     "loan_asset_address": [],
+#     "loan_asset_symbol": [],
+#     "loan_asset_decimals": [],
+#     "collateral_asset_address": [],
+#     "collateral_asset_symbol": [],
+#     "collateral_asset_decimals": [],
+#     "network": [],
+# }
+# skip=0
+# while 1:
+#     res = query_aave_graphql(MARKETS_QUERY.replace("$skip$", str(skip)))["data"]["markets"]["items"]
+#     if len(res) == 0:
+#         break
+#     skip += len(res)
+#     print("processing", skip)
+#     for item in res:
+#         if item["collateralAsset"] is None or item["oracle"] is None:
+#             continue
+#         markets_data["address"].append(item["uniqueKey"])
+#         markets_data["lltv"].append(item["lltv"])
+#         markets_data["oracle_address"].append(item["oracle"]["address"])
+#         markets_data["creation_datetime"].append(item["creationTimestamp"])
+#         markets_data["network"].append("eth" if item["loanAsset"]["chain"]["id"] == 1 else "base")
+
+#         markets_data["loan_asset_address"].append(item["loanAsset"]["address"])
+#         markets_data["loan_asset_symbol"].append(item["loanAsset"]["symbol"])
+#         markets_data["loan_asset_decimals"].append(item["loanAsset"]["decimals"])
+        
+#         markets_data["collateral_asset_address"].append(item["collateralAsset"]["address"])
+#         markets_data["collateral_asset_symbol"].append(item["collateralAsset"]["symbol"])
+#         markets_data["collateral_asset_decimals"].append(item["collateralAsset"]["decimals"])
+
+# # for k,v in markets_data.items(): print(k, ', ', len(v))
+
+# markets_data = pd.DataFrame(markets_data)
+        
+# markets_data["creation_datetime"] = pd.to_datetime(markets_data["creation_datetime"], unit='s').dt.strftime('%Y-%m-%d %H:%M:%S')
+# print("PROCESSED MARKETS")
+# markets_data.to_csv("./data/common/markets_meta.csv", index=False)
+
+
+
+def get_data_as_json(query, dest):
+
+    
+    skip=0
+    all_markets_data = {}
+    while 1:
+        res = query_aave_graphql(query.replace("$skip$", str(skip)))["data"]["markets"]["items"]
+        if len(res) == 0:
+            break
+        skip += len(res)
+        print("processing", skip)
+        
+        for item in res:
+            if item["collateralAsset"] is None or item["oracle"] is None:
+                continue
+            current_market = {}
+            current_market["address"] = (item["uniqueKey"])
+            current_market["lltv"] = (item["lltv"])
+            current_market["oracle_address"] = (item["oracle"]["address"])
+            current_market["creation_datetime"] = (item["creationTimestamp"])
+            current_market["network"] = ("eth" if item["loanAsset"]["chain"]["id"] == 1 else "base")
+
+            current_market["loan_asset_address"] = (item["loanAsset"]["address"])
+            current_market["loan_asset_symbol"] = (item["loanAsset"]["symbol"])
+            current_market["loan_asset_decimals"] = (item["loanAsset"]["decimals"])
+            
+            current_market["collateral_asset_address"] = (item["collateralAsset"]["address"])
+            current_market["collateral_asset_symbol"] = (item["collateralAsset"]["symbol"])
+            current_market["collateral_asset_decimals"] = (item["collateralAsset"]["decimals"])
+
+            
+            irm_curve_data = []
+            for i in item["currentIrmCurve"]:
+                irm_curve_data.append([
+                    i["utilization"],
+                    i["borrowApy"],
+                    i["supplyApy"],
+                ])
+            current_market["irm_curve"] = irm_curve_data
+
+            all_markets_data[current_market["address"]] = current_market
+
+    with open(dest, 'w') as f:
+        json.dump(all_markets_data, f, indent=4)
+
+
+# get_data_as_json(MARKETS_QUERY, dest="./data/common/markets_meta.json")
+
+get_data_as_json(MARKETS_QUERY, dest="./data/common/markets_meta.json")
