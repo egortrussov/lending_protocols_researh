@@ -1,6 +1,3 @@
-from queries import (
-    get_vaults_query,
-)
 import requests
 
 MORPHO_GRAPHQL_API = "https://api.morpho.org/graphql"

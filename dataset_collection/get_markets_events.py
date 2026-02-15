@@ -9,8 +9,8 @@ import time
 BATCH_SIZE = 100
 MORPHO_GRAPHQL_API = "https://api.morpho.org/graphql"
 MARKETS_HASHES = {
-    # "eth_cbbtc_usdc": "0x64d65c9a2d91c36d56fbc42d69e979335320169b3df63bf92789e2c8883fcc64",
-    "eth_cbbtc_usdt": "0x45671fb8d5dea1c4fbca0b8548ad742f6643300eeb8dbd34ad64a658b2b05bca",
+    "eth_cbbtc_usdc": "0x64d65c9a2d91c36d56fbc42d69e979335320169b3df63bf92789e2c8883fcc64",
+    # "eth_cbbtc_usdt": "0x45671fb8d5dea1c4fbca0b8548ad742f6643300eeb8dbd34ad64a658b2b05bca",
 
     # "eth_wbtc_usdc": "0x3a85e619751152991742810df6ec69ce473daef99e28a64ab2340d7b7ccfee49",
     # "eth_wbtc_usdt": "0xa921ef34e2fc7a27ccc50ae7e4b154e16c9799d3387076c421423ef52ac4df99",
@@ -68,16 +68,33 @@ def get_result_df(result, market):
         "user_address": [],
         "assets": [],
         "assets_usd": [],
+        "liquidated_assets": [],
+        "liquidated_assets_usd": [],
     })
     for transaction in result["data"]["transactions"]["items"]:
-        new_row = {
-            "hash": transaction["hash"],
-            "type": transaction["type"],
-            "timestamp": transaction["timestamp"],
-            "user_address": transaction["user"]["address"],
-            "assets": transaction["data"]["assets"],
-            "assets_usd": transaction["data"]["assetsUsd"],
-        }
+        if transaction["type"] == "MarketLiquidation":
+            new_row = {
+                "hash": transaction["hash"],
+                "type": transaction["type"],
+                "timestamp": transaction["timestamp"],
+                "user_address": transaction["user"]["address"],
+                "assets": transaction["data"]["repaidAssets"],
+                "assets_usd": transaction["data"]["repaidAssetsUsd"],
+                "liquidated_assets": transaction["data"]["seizedAssets"],
+                "liquidated_assets_usd": transaction["data"]["seizedAssetsUsd"],
+                
+            }
+        else:
+            new_row = {
+                "hash": transaction["hash"],
+                "type": transaction["type"],
+                "timestamp": transaction["timestamp"],
+                "user_address": transaction["user"]["address"],
+                "assets": transaction["data"]["assets"],
+                "assets_usd": transaction["data"]["assetsUsd"],
+                "liquidated_assets": 0,
+                "liquidated_assets_usd": 0,
+            }
         df.loc[len(df)] = new_row
     df["market"] = market
     return df
@@ -109,8 +126,8 @@ def get_actions_history(
 
 
 def process_date_range(start_date_str, end_date_str, market, csv_file_path):
-    start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
-    end_date = datetime.strptime(end_date_str, '%Y-%m-%d')
+    start_date = datetime.strptime(start_date_str, "%Y-%m-%d %H:%M:%S")
+    end_date = datetime.strptime(end_date_str, "%Y-%m-%d %H:%M:%S")
     
     all_data = []
     current_end = end_date
@@ -141,6 +158,7 @@ def process_date_range(start_date_str, end_date_str, market, csv_file_path):
             combined_df["market_address"] = MARKETS_HASHES[market]
             combined_df.to_csv(csv_file_path, index=False)
             print(f"Saved CHECKPOINT {len(combined_df)} total events to {csv_file_path}")
+
     print(f"  {current_start.strftime('%Y-%m-%d')}: {len(daily_df)} events in {pages} pages")
     
     current_end = current_start
@@ -186,8 +204,8 @@ def get_file_size(file_path):
 
 for market in MARKETS_HASHES.keys():
     process_date_range(
-        start_date_str="2025-09-01",
-        end_date_str="2026-10-01",
+        start_date_str="2023-03-31 17:26:24",
+        end_date_str="2026-02-01 00:00:00",
         market=market,
         csv_file_path=f"./data/markets_raw/{market}.csv",
     )

@@ -1,6 +1,9 @@
 from queries import (
     get_vaults_query,
 )
+from utils import (
+    send_morpho_request
+)
 import json
 import requests
 import pandas as pd 
@@ -217,4 +220,64 @@ def get_data_as_json(query, dest):
 
 # get_data_as_json(MARKETS_QUERY, dest="./data/common/markets_meta.json")
 
-get_data_as_json(MARKETS_QUERY, dest="./data/common/markets_meta.json")
+# get_data_as_json(MARKETS_QUERY, dest="./data/common/markets_meta.json")
+
+
+
+VALUTS_QUERY = """
+query {
+  vaults(first: 500, skip: $skip$, where: {
+    chainId_in: [1, 8453],
+    listed: true,
+  }) {
+    items {
+      address
+      symbol
+      name
+      asset {
+        id
+        address
+        decimals
+        symbol
+      }
+      chain {
+        id
+        network
+      }
+    }
+  }
+}
+"""
+
+
+def get_vaults_data_as_json(query, dest):
+
+    
+    skip=0
+    all_vaults_data = {}
+    while 1:
+        res = send_morpho_request(query.replace("$skip$", str(skip)))["data"]["vaults"]["items"]
+        if len(res) == 0:
+            break
+        skip += len(res)
+        print("processing", skip)
+        
+        for item in res:
+            # if item["collateralAsset"] is None or item["oracle"] is None:
+            #     continue
+            current_vault = {}
+
+            current_vault["address"] = item["address"]
+            current_vault["symbol"] = item["symbol"]
+            current_vault["name"] = item["name"]
+            current_vault["network"] = "eth" if item["chain"]["id"] == 1 else "base"
+            current_vault["asset_address"] = item["asset"]["id"]
+            current_vault["asset_symbol"] = item["asset"]["symbol"]
+            current_vault["asset_decimals"] = item["asset"]["decimals"]
+            
+            all_vaults_data[current_vault["address"]] = current_vault
+
+    with open(dest, 'w') as f:
+        json.dump(all_vaults_data, f, indent=4)
+
+get_vaults_data_as_json(VALUTS_QUERY, dest="./data/common/vaults_meta.json")

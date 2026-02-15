@@ -13,7 +13,8 @@ def get_actions_query(start_timestamp, end_timestamp, market, skip):
                 MarketBorrow,
                 MarketRepay, 
                 MarketSupply,
-                MarketSupplyCollateral
+                MarketSupplyCollateral,
+                MarketLiquidation,
             ],
             marketUniqueKey_in: [
                 "market_hash"
@@ -61,6 +62,15 @@ def get_actions_query(start_timestamp, end_timestamp, market, skip):
                 market {
                     uniqueKey
                     
+                }
+                }
+                ... on MarketLiquidationTransactionData {
+                repaidAssets
+                repaidAssetsUsd
+                seizedAssets
+                seizedAssetsUsd
+                market {
+                    uniqueKey
                 }
                 }
             }
