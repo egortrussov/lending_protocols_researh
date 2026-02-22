@@ -9,7 +9,9 @@ import time
 BATCH_SIZE = 100
 MORPHO_GRAPHQL_API = "https://api.morpho.org/graphql"
 MARKETS_HASHES = {
-    "eth_cbbtc_usdc": "0x64d65c9a2d91c36d56fbc42d69e979335320169b3df63bf92789e2c8883fcc64",
+    # "eth_cbbtc_usdc": "0x64d65c9a2d91c36d56fbc42d69e979335320169b3df63bf92789e2c8883fcc64",
+    # "eth_mapollo_usdc": "0x031c7333014af51e4fd18031d14e4eaada58348cde3f6dc6ea8cca16f7387fb2",
+    "eth_rlp_usdc": "0xe1b65304edd8ceaea9b629df4c3c926a37d1216e27900505c04f14b2ed279f33",
     # "eth_cbbtc_usdt": "0x45671fb8d5dea1c4fbca0b8548ad742f6643300eeb8dbd34ad64a658b2b05bca",
 
     # "eth_wbtc_usdc": "0x3a85e619751152991742810df6ec69ce473daef99e28a64ab2340d7b7ccfee49",
@@ -205,7 +207,7 @@ def get_file_size(file_path):
 for market in MARKETS_HASHES.keys():
     process_date_range(
         start_date_str="2023-03-31 17:26:24",
-        end_date_str="2026-02-01 00:00:00",
+        end_date_str="2027-02-01 00:00:00",
         market=market,
         csv_file_path=f"./data/markets_raw/{market}.csv",
     )

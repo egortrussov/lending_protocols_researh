@@ -87,12 +87,22 @@ query {
 # print("PROCESSED VAULTS")
 # valuts_data.to_csv("./data/common/vaults_meta.csv", index=False)
 
+import pandas as pd
+import os
+markets_list = []
+raw_path = "/Users/yegortrussov/Documents/ml/lending_protocols/dataset_collection/data/markets_raw"
 
+for file in os.listdir(raw_path):
+    markets_list.append(
+        pd.read_csv(raw_path + "/" + file)["market_address"].unique()[0]
+    )
 
 MARKETS_QUERY = """
 query {
-  markets(first: 100, skip: $skip$, where: {
+  markets(first: 1, skip: $skip$, where: {
     chainId_in: [1, 8453],
+    listed: true,
+    uniqueKey_in: $market_ids$
   }) {
     items {
       uniqueKey
@@ -102,6 +112,14 @@ query {
         address
       }
       irmAddress
+      historicalState {
+        rateAtTarget(options: {
+          interval: HOUR
+        }) {
+          x
+          y
+        }
+      }
       currentIrmCurve {
         utilization
         borrowApy
@@ -123,54 +141,7 @@ query {
     }
   }
 }
-"""
-
-# markets_data = {
-#     "address": [],
-#     "lltv": [],
-#     "oracle_address": [],
-#     "creation_datetime": [],
-#     "loan_asset_address": [],
-#     "loan_asset_symbol": [],
-#     "loan_asset_decimals": [],
-#     "collateral_asset_address": [],
-#     "collateral_asset_symbol": [],
-#     "collateral_asset_decimals": [],
-#     "network": [],
-# }
-# skip=0
-# while 1:
-#     res = query_aave_graphql(MARKETS_QUERY.replace("$skip$", str(skip)))["data"]["markets"]["items"]
-#     if len(res) == 0:
-#         break
-#     skip += len(res)
-#     print("processing", skip)
-#     for item in res:
-#         if item["collateralAsset"] is None or item["oracle"] is None:
-#             continue
-#         markets_data["address"].append(item["uniqueKey"])
-#         markets_data["lltv"].append(item["lltv"])
-#         markets_data["oracle_address"].append(item["oracle"]["address"])
-#         markets_data["creation_datetime"].append(item["creationTimestamp"])
-#         markets_data["network"].append("eth" if item["loanAsset"]["chain"]["id"] == 1 else "base")
-
-#         markets_data["loan_asset_address"].append(item["loanAsset"]["address"])
-#         markets_data["loan_asset_symbol"].append(item["loanAsset"]["symbol"])
-#         markets_data["loan_asset_decimals"].append(item["loanAsset"]["decimals"])
-        
-#         markets_data["collateral_asset_address"].append(item["collateralAsset"]["address"])
-#         markets_data["collateral_asset_symbol"].append(item["collateralAsset"]["symbol"])
-#         markets_data["collateral_asset_decimals"].append(item["collateralAsset"]["decimals"])
-
-# # for k,v in markets_data.items(): print(k, ', ', len(v))
-
-# markets_data = pd.DataFrame(markets_data)
-        
-# markets_data["creation_datetime"] = pd.to_datetime(markets_data["creation_datetime"], unit='s').dt.strftime('%Y-%m-%d %H:%M:%S')
-# print("PROCESSED MARKETS")
-# markets_data.to_csv("./data/common/markets_meta.csv", index=False)
-
-
+""".replace("$market_ids$", str(markets_list)).replace("'", '"')
 
 def get_data_as_json(query, dest):
 
@@ -202,6 +173,10 @@ def get_data_as_json(query, dest):
             current_market["collateral_asset_symbol"] = (item["collateralAsset"]["symbol"])
             current_market["collateral_asset_decimals"] = (item["collateralAsset"]["decimals"])
 
+            current_market["rate_at_target"] = {
+              x["x"]: x["y"] for x in item["historicalState"]["rateAtTarget"]
+            }
+
             
             irm_curve_data = []
             for i in item["currentIrmCurve"]:
@@ -218,66 +193,66 @@ def get_data_as_json(query, dest):
         json.dump(all_markets_data, f, indent=4)
 
 
-# get_data_as_json(MARKETS_QUERY, dest="./data/common/markets_meta.json")
+get_data_as_json(MARKETS_QUERY, dest="./data/common/markets_meta.json")
 
 # get_data_as_json(MARKETS_QUERY, dest="./data/common/markets_meta.json")
 
 
 
-VALUTS_QUERY = """
-query {
-  vaults(first: 500, skip: $skip$, where: {
-    chainId_in: [1, 8453],
-    listed: true,
-  }) {
-    items {
-      address
-      symbol
-      name
-      asset {
-        id
-        address
-        decimals
-        symbol
-      }
-      chain {
-        id
-        network
-      }
-    }
-  }
-}
-"""
+# VALUTS_QUERY = """
+# query {
+#   vaults(first: 500, skip: $skip$, where: {
+#     chainId_in: [1, 8453],
+#     listed: true,
+#   }) {
+#     items {
+#       address
+#       symbol
+#       name
+#       asset {
+#         id
+#         address
+#         decimals
+#         symbol
+#       }
+#       chain {
+#         id
+#         network
+#       }
+#     }
+#   }
+# }
+# """
 
 
-def get_vaults_data_as_json(query, dest):
+# def get_vaults_data_as_json(query, dest):
 
     
-    skip=0
-    all_vaults_data = {}
-    while 1:
-        res = send_morpho_request(query.replace("$skip$", str(skip)))["data"]["vaults"]["items"]
-        if len(res) == 0:
-            break
-        skip += len(res)
-        print("processing", skip)
+#     skip=0
+#     all_vaults_data = {}
+#     while 1:
+#         res = send_morpho_request(query.replace("$skip$", str(skip)))["data"]["vaults"]["items"]
+#         if len(res) == 0:
+#             break
+#         skip += len(res)
+#         print("processing", skip)
         
-        for item in res:
-            # if item["collateralAsset"] is None or item["oracle"] is None:
-            #     continue
-            current_vault = {}
+#         for item in res:
+#             # if item["collateralAsset"] is None or item["oracle"] is None:
+#             #     continue
+#             current_vault = {}
 
-            current_vault["address"] = item["address"]
-            current_vault["symbol"] = item["symbol"]
-            current_vault["name"] = item["name"]
-            current_vault["network"] = "eth" if item["chain"]["id"] == 1 else "base"
-            current_vault["asset_address"] = item["asset"]["id"]
-            current_vault["asset_symbol"] = item["asset"]["symbol"]
-            current_vault["asset_decimals"] = item["asset"]["decimals"]
+#             current_vault["address"] = item["address"]
+#             current_vault["symbol"] = item["symbol"]
+#             current_vault["name"] = item["name"]
+#             current_vault["network"] = "eth" if item["chain"]["id"] == 1 else "base"
+#             current_vault["asset_address"] = item["asset"]["id"]
+#             current_vault["asset_symbol"] = item["asset"]["symbol"]
+#             current_vault["asset_decimals"] = item["asset"]["decimals"]
             
-            all_vaults_data[current_vault["address"]] = current_vault
+#             all_vaults_data[current_vault["address"]] = current_vault
 
-    with open(dest, 'w') as f:
-        json.dump(all_vaults_data, f, indent=4)
+#     with open(dest, 'w') as f:
+#         json.dump(all_vaults_data, f, indent=4)
 
-get_vaults_data_as_json(VALUTS_QUERY, dest="./data/common/vaults_meta.json")
+# get_vaults_data_as_json(VALUTS_QUERY, dest="./data/common/vaults_meta.json")

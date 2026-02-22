@@ -1277,6 +1277,23 @@ assets_address_list = [
 "0x0000000000c5dc95539589fbD24BE07c6C14eCa4",
 
 ]
+
+import pandas as pd
+import os
+assets_address_list = []
+with open("/Users/yegortrussov/Documents/ml/lending_protocols/dataset_collection/data/common/markets_meta.json", 'r') as f:
+    markets_meta = json.load(f)
+
+for k,v in markets_meta.items():
+    assets_address_list.append(
+        v["loan_asset_address"]
+    )
+    assets_address_list.append(
+        v["collateral_asset_address"]
+    )
+
+
+
 assets_data = {}
 
 ASSETS_QUERY = """
@@ -1289,7 +1306,7 @@ query {
     historicalPriceUsd(
       options: {
         startTimestamp: 1704067200
-        endTimestamp: 1767225600
+        endTimestamp: 1771720210
         interval: HOUR
       }
     ) {
@@ -1313,6 +1330,7 @@ def get_data_as_json(address):
           ress = send_morpho_request(ASSETS_QUERY.replace("$address$", str(address)))
           res = ress["data"]["assetByAddress"]
         except Exception as e:
+            print(e)
             return {}
         # print(ress)
         
