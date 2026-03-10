@@ -11,10 +11,10 @@ MORPHO_GRAPHQL_API = "https://api.morpho.org/graphql"
 MARKETS_HASHES = {
     # "eth_cbbtc_usdc": "0x64d65c9a2d91c36d56fbc42d69e979335320169b3df63bf92789e2c8883fcc64",
     # "eth_mapollo_usdc": "0x031c7333014af51e4fd18031d14e4eaada58348cde3f6dc6ea8cca16f7387fb2",
-    "eth_rlp_usdc": "0xe1b65304edd8ceaea9b629df4c3c926a37d1216e27900505c04f14b2ed279f33",
+    # "eth_rlp_usdc": "0xe1b65304edd8ceaea9b629df4c3c926a37d1216e27900505c04f14b2ed279f33",
     # "eth_cbbtc_usdt": "0x45671fb8d5dea1c4fbca0b8548ad742f6643300eeb8dbd34ad64a658b2b05bca",
 
-    # "eth_wbtc_usdc": "0x3a85e619751152991742810df6ec69ce473daef99e28a64ab2340d7b7ccfee49",
+    "eth_wbtc_usdc": "0x3a85e619751152991742810df6ec69ce473daef99e28a64ab2340d7b7ccfee49",
     # "eth_wbtc_usdt": "0xa921ef34e2fc7a27ccc50ae7e4b154e16c9799d3387076c421423ef52ac4df99",
 
     # "eth_wsteth_usdt": "0xe7e9694b754c4d4f7e21faf7223f6fa71abaeb10296a4c43a54a7977149687d2",

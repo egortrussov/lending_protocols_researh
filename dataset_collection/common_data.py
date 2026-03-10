@@ -91,11 +91,21 @@ import pandas as pd
 import os
 markets_list = []
 raw_path = "/Users/yegortrussov/Documents/ml/lending_protocols/dataset_collection/data/markets_raw"
-
+with open("/Users/yegortrussov/Documents/ml/lending_protocols/dataset_collection/data/common/markets_meta.json", 'r') as f:
+    markets_meta = json.load(f)
 for file in os.listdir(raw_path):
-    markets_list.append(
-        pd.read_csv(raw_path + "/" + file)["market_address"].unique()[0]
-    )
+    md = pd.read_csv(raw_path + "/" + file)["market_address"].unique()[0]
+    print(md in markets_meta.keys(), )
+    if md not in markets_meta.keys():
+      markets_list.append(
+          md
+      )
+
+print(markets_list)
+
+if len(markets_list) == 0:
+    print("all markets exists")
+    exit(0)
 
 MARKETS_QUERY = """
 query {
@@ -142,12 +152,17 @@ query {
   }
 }
 """.replace("$market_ids$", str(markets_list)).replace("'", '"')
+import json
 
 def get_data_as_json(query, dest):
 
     
     skip=0
-    all_markets_data = {}
+    with open("/Users/yegortrussov/Documents/ml/lending_protocols/dataset_collection/data/common/markets_meta.json", 'r') as f:
+      markets_meta = json.load(f)
+    all_markets_data = markets_meta
+    
+
     while 1:
         res = query_aave_graphql(query.replace("$skip$", str(skip)))["data"]["markets"]["items"]
         if len(res) == 0:
@@ -159,6 +174,10 @@ def get_data_as_json(query, dest):
             if item["collateralAsset"] is None or item["oracle"] is None:
                 continue
             current_market = {}
+            if item["uniqueKey"] in markets_meta.keys():
+                all_markets_data[item["uniqueKey"]] = markets_meta[item["uniqueKey"]]
+                print(f"Market {item['uniqueKey']} from cache")
+                continue
             current_market["address"] = (item["uniqueKey"])
             current_market["lltv"] = (item["lltv"])
             current_market["oracle_address"] = (item["oracle"]["address"])

@@ -1306,7 +1306,7 @@ query {
     historicalPriceUsd(
       options: {
         startTimestamp: 1704067200
-        endTimestamp: 1771720210
+        endTimestamp: 1772497816
         interval: HOUR
       }
     ) {
@@ -1341,9 +1341,15 @@ def get_data_as_json(address):
         return asset_data
         
         
+with open("/Users/yegortrussov/Documents/ml/lending_protocols/dataset_collection/data/common/assets_meta.json", 'r') as f:
+    assets_meta = json.load(f)
 
 all_assets_data = {}
 for asset_address in tqdm(assets_address_list):
+    if asset_address in assets_meta.keys():
+        all_assets_data[asset_address] = assets_meta[asset_address]
+        print(f"Skipped asset {asset_address} from cache")
+        continue
     all_assets_data[asset_address] = get_data_as_json(asset_address)
     if len(all_assets_data[asset_address].keys()) == 0:
         no_data += 1

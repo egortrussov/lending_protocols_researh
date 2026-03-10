@@ -48,7 +48,7 @@ def select_users_by_period(df_actions, start_date, end_date, threshold_date=None
     return result.sort_values(['user_address', 'timestamp'])
 
 
-def create_hourly_user_dataset(df_actions, df_market, n_hours=1, threshold_date=None):
+def create_hourly_user_dataset(df_actions, df_market, n_hours=1, threshold_date=None, start_with_open=True):
     df_actions = df_actions.sort_values(['user_address', 'timestamp']).copy()
     df_actions = df_actions.drop_duplicates(['user_address', 'timestamp'])
     df_market = df_market.sort_values('timestamp').copy()
@@ -60,10 +60,10 @@ def create_hourly_user_dataset(df_actions, df_market, n_hours=1, threshold_date=
     for user, user_df in df_actions.groupby('user_address'):
         # Find position open event
         open_events = user_df[user_df['event_sequence_type'] == 'position_open']
-        if open_events.empty:
+        if open_events.empty and start_with_open:
             continue
         
-        position_open_time = open_events.iloc[0]['timestamp']
+        position_open_time = user_df["timestamp"].min() if len(open_events) == 0 else open_events.iloc[0]['timestamp']
         
         # Find first position close event after open
         close_events = user_df[(user_df['event_sequence_type'] == 'position_close') & 
@@ -75,8 +75,10 @@ def create_hourly_user_dataset(df_actions, df_market, n_hours=1, threshold_date=
             if threshold_date:
                 threshold_ts = int(pd.Timestamp(threshold_date).timestamp())
                 close_time = threshold_ts
-            else:
+            elif start_with_open:
                 continue
+            else:
+                close_time = user_df["timestamp"].max()
         
         # Get actions between open and close (inclusive)
         user_df = user_df[(user_df['timestamp'] >= position_open_time) & 
@@ -94,6 +96,7 @@ def create_hourly_user_dataset(df_actions, df_market, n_hours=1, threshold_date=
             state_map[action['timestamp']] = {
                 'collateral': action['collateral_after'],
                 'debt': action['debt_after'],
+                'supply': action['supply_after'],
                 'event_type': action['event_sequence_type']
             }
         
@@ -114,6 +117,7 @@ def create_hourly_user_dataset(df_actions, df_market, n_hours=1, threshold_date=
                 closest_ts = max(actions_before)
                 collateral = state_map[closest_ts]['collateral']
                 debt = state_map[closest_ts]['debt']
+                supply = state_map[closest_ts]['supply']
                 current_event = state_map[closest_ts]['event_type']
                 
                 # Check if this is the closing action
@@ -142,6 +146,7 @@ def create_hourly_user_dataset(df_actions, df_market, n_hours=1, threshold_date=
                 'datetime': pd.to_datetime(hour_ts, unit='s'),
                 'collateral': collateral,
                 'debt': debt,
+                'supply': supply,
                 'ltv': ltv,
                 'action': action_type,
                 'total_supply': market_row['total_supply'],
@@ -149,6 +154,8 @@ def create_hourly_user_dataset(df_actions, df_market, n_hours=1, threshold_date=
                 'market_utilization': market_row['utilization'],
                 'borrow_rate': market_row['borrow_rate'],
                 'supply_rate': market_row['supply_rate'],
+                'borrow_rate_rolling': market_row['borrow_rate_rolling'],
+                'supply_rate_rolling': market_row['supply_rate_rolling'],
                 'collateral_price': collateral_price,
                 'loan_asset_price': loan_price,
                 'volatility_6h': market_row['volatility_6h'],
