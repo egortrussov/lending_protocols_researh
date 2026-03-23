@@ -101,7 +101,7 @@ for file in os.listdir(raw_path):
           md
       )
 
-print(markets_list)
+print("MARKETS_TO_PARSE", markets_list)
 
 if len(markets_list) == 0:
     print("all markets exists")
@@ -111,7 +111,6 @@ MARKETS_QUERY = """
 query {
   markets(first: 1, skip: $skip$, where: {
     chainId_in: [1, 8453],
-    listed: true,
     uniqueKey_in: $market_ids$
   }) {
     items {
@@ -152,6 +151,7 @@ query {
   }
 }
 """.replace("$market_ids$", str(markets_list)).replace("'", '"')
+
 import json
 
 def get_data_as_json(query, dest):
@@ -164,6 +164,8 @@ def get_data_as_json(query, dest):
     
 
     while 1:
+        print(query.replace("$skip$", str(skip)))
+
         res = query_aave_graphql(query.replace("$skip$", str(skip)))["data"]["markets"]["items"]
         if len(res) == 0:
             break

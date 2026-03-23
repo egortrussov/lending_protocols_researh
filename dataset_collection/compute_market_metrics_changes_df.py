@@ -720,7 +720,7 @@ print(args.markets)  # List of strings
 
 # exit(0)
 
-for file in tqdm(args.markets):
+for file in tqdm(args.markets[0].split(' ')):
     print("processing file", file)
     # if "base" in file:
     #     continue

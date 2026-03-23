@@ -10,6 +10,10 @@ def plot_user_metrics(df, fields, user_address=None, dates_range=None):
     """
     if user_address:
         plot_df = df[df['user_address'] == user_address].copy()
+        print("User address", {user_address})
+        print("MAX DEBT", {plot_df["debt"].max()})
+        
+        
         if plot_df.empty:
             print(f"No data for user {user_address}")
             return
