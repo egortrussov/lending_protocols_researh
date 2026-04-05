@@ -301,16 +301,16 @@ MARKETS_HASHES = {
 
 # }
 
-# MARKETS_HASHES = {
-#     "base_cbbtc_usdc_full": "0x9103c3b4e834476c9a62ea009ba2c884ee42e94e6e314a26f04d312434191836",
-# }
+MARKETS_HASHES = {
+    "base_cbbtc_usdc_full1": "0x9103c3b4e834476c9a62ea009ba2c884ee42e94e6e314a26f04d312434191836",
+}
 
 if '-raw' in sys.argv:
     print("Fetching raw parameters...")
     for market in MARKETS_HASHES.keys():
         process_date_range(
-            start_date_str="2025-11-26 17:21:02",
-            # start_date_str="2022-01-01 00:00:00",
+            # start_date_str="2025-11-26 17:21:02",
+            start_date_str="2022-01-01 00:00:00",
             end_date_str="2027-02-01 00:00:00",
             market=market,
             csv_file_path=f"./data/markets_raw/{market}6.csv",

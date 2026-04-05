@@ -169,3 +169,76 @@ def plot_user_metrics(df, fields, user_address=None, dates_range=None, lookback_
             fig.update_yaxes(title_text=fields[1], secondary_y=True)
 
     fig.show()
+
+
+
+import plotly.graph_objects as go
+import plotly.express as px
+from plotly.subplots import make_subplots
+import pandas as pd
+
+def plot_market_features(market_df, fields, dates_range=None, y_ranges=None):
+    """
+    Plot hourly market features over time.
+    
+    Parameters:
+    market_df : DataFrame with columns 'datetime' (or 'timestamp') and the fields to plot.
+    fields : list of 1 or 2 feature names.
+    dates_range : optional tuple (start, end) as strings or datetimes.
+    y_ranges : optional dict mapping field names to [lower, upper] for y‑axis limits.
+    """
+    df = market_df.copy()
+    if 'datetime' not in df.columns:
+        if 'timestamp' in df.columns:
+            df['datetime'] = pd.to_datetime(df['timestamp'], unit='s')
+        else:
+            raise ValueError("DataFrame must have a 'datetime' or 'timestamp' column.")
+    df = df.sort_values('datetime')
+    
+    if dates_range is not None:
+        start, end = pd.to_datetime(dates_range[0]), pd.to_datetime(dates_range[1])
+        df = df[(df['datetime'] >= start) & (df['datetime'] <= end)]
+    
+    fig = make_subplots(specs=[[{"secondary_y": len(fields) > 1}]])
+    colors = px.colors.qualitative.Plotly
+    
+    # First field on left axis
+    fig.add_trace(
+        go.Scatter(x=df['datetime'], y=df[fields[0]],
+                   mode='lines',
+                   name=fields[0],
+                   line=dict(color=colors[0], width=2)),
+        secondary_y=False
+    )
+    
+    # Second field on right axis (if provided)
+    if len(fields) > 1:
+        fig.add_trace(
+            go.Scatter(x=df['datetime'], y=df[fields[1]],
+                       mode='lines',
+                       name=fields[1],
+                       line=dict(color=colors[1], width=2, dash='dot')),
+            secondary_y=True
+        )
+    
+    # Layout styling (matching the user metrics function)
+    fig.update_layout(
+        title=f"Market Features: {', '.join(fields)}",
+        hovermode='x unified',
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+        template="plotly_white"
+    )
+    
+    fig.update_xaxes(title_text="Time", tickformat="%Y-%m-%d %H:%M")
+    fig.update_yaxes(title_text=fields[0], secondary_y=False)
+    if len(fields) > 1:
+        fig.update_yaxes(title_text=fields[1], secondary_y=True)
+    
+    # Apply manual y‑axis limits if provided
+    if y_ranges:
+        if fields[0] in y_ranges:
+            fig.update_yaxes(range=y_ranges[fields[0]], secondary_y=False)
+        if len(fields) > 1 and fields[1] in y_ranges:
+            fig.update_yaxes(range=y_ranges[fields[1]], secondary_y=True)
+    
+    fig.show()
