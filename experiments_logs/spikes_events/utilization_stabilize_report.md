@@ -39,7 +39,6 @@
 | eth_sdeusd_usdc | 88 | -0.1050 | **-0.1532** | 0.0021 | 0.0005 | 0.0201 |
 | eth_mapollo_usdc | 6 | **-0.1188** | -0.0560 |  | 0.0217 |  |
 | eth_syrupusdc_pyusd | 4 | -0.0926 | **-0.0950** |  |  |  |
-
 ## Summary Across All Markets
 
 | Metric | Value |
@@ -51,7 +50,7 @@
 
 ## Per-Market Analysis
 
-### base_cbbtc_usdc_full
+## base_cbbtc_usdc_full
 
 - **Max total supply (USD)**: 1,162,816,910.67
 - **Total events**: 1,584,000
@@ -67,10 +66,20 @@
 | MarketLiquidation | 7.0 | -0.0000 |
 | MarketBorrow | 132.0 | 0.0002 |
 | MarketWithdraw | 169.0 | 0.0119 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 37 |
+| MarketSupply | 5 |
+| MarketRepay,MarketWithdrawCollateral | 1 |
+| MarketBorrow,MarketSupplyCollateral | 1 |
+| MarketSupplyCollateral | 1 |
+
 
 ---
 
-### eth_wsteth_usdc
+## eth_wsteth_usdc
 
 - **Max total supply (USD)**: 181,657,023.47
 - **Total events**: 38,403
@@ -85,10 +94,17 @@
 | MarketRepay | 28.0 | -0.0347 |
 | MarketBorrow | 19.0 | -0.0007 |
 | MarketWithdraw | 97.0 | 0.0144 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 17 |
+| MarketSupply | 1 |
+
 
 ---
 
-### eth_wbtc_usdc
+## eth_wbtc_usdc
 
 - **Max total supply (USD)**: 277,575,216.81
 - **Total events**: 36,916
@@ -103,10 +119,19 @@
 | MarketRepay | 8.0 | -0.0036 |
 | MarketBorrow | 21.0 | 0.0073 |
 | MarketWithdraw | 25.0 | 0.0147 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 60 |
+| MarketSupply,MarketWithdraw | 3 |
+| MarketBorrow,MarketSupply,MarketSupplyCollateral | 1 |
+| MarketBorrow,MarketSupplyCollateral | 1 |
+
 
 ---
 
-### base_wbtc_usdc
+## base_wbtc_usdc
 
 - **Max total supply (USD)**: 269,255,896.54
 - **Total events**: 26,928
@@ -121,10 +146,18 @@
 | MarketRepay | 4.0 | -0.0026 |
 | MarketBorrow | 5.0 | 0.0036 |
 | MarketWithdraw | 22.0 | 0.0175 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 63 |
+| MarketSupply,MarketWithdraw | 4 |
+| MarketBorrow,MarketSupply,MarketSupplyCollateral | 1 |
+
 
 ---
 
-### eth_cbbtc_usdc
+## eth_cbbtc_usdc
 
 - **Max total supply (USD)**: 607,128,500.34
 - **Total events**: 48,487
@@ -139,10 +172,20 @@
 | MarketRepay | 17.0 | -0.0260 |
 | MarketWithdraw | 83.0 | 0.0086 |
 | MarketBorrow | 6.0 | 0.0162 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 17 |
+| MarketBorrow,MarketSupply,MarketSupplyCollateral | 7 |
+| MarketSupply,MarketWithdraw | 1 |
+| MarketBorrow,MarketSupply | 1 |
+| MarketSupply | 1 |
+
 
 ---
 
-### eth_rlp_usdc
+## eth_rlp_usdc
 
 - **Max total supply (USD)**: 154,288,632.54
 - **Total events**: 47,031
@@ -157,10 +200,20 @@
 | MarketRepay | 42.0 | -0.0247 |
 | MarketBorrow | 1.0 | 0.0000 |
 | MarketWithdraw | 264.0 | 0.0064 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 132 |
+| MarketSupply | 4 |
+| MarketBorrow,MarketSupplyCollateral | 2 |
+| MarketSupply,MarketWithdraw | 2 |
+| MarketBorrow | 1 |
+
 
 ---
 
-### base_wbtc_usdt
+## base_wbtc_usdt
 
 - **Max total supply (USD)**: 541,018,474.87
 - **Total events**: 22,327
@@ -175,10 +228,18 @@
 | MarketRepay | 2.0 | -0.0186 |
 | MarketBorrow | 9.0 | 0.0006 |
 | MarketWithdraw | 59.0 | 0.0158 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 20 |
+| MarketSupply,MarketWithdraw | 5 |
+| MarketBorrow,MarketSupplyCollateral | 1 |
+
 
 ---
 
-### eth_wbtc_usdt
+## eth_wbtc_usdt
 
 - **Max total supply (USD)**: 529,825,941.69
 - **Total events**: 22,235
@@ -193,10 +254,18 @@
 | MarketRepay | 3.0 | -0.0195 |
 | MarketBorrow | 11.0 | 0.0007 |
 | MarketWithdraw | 64.0 | 0.0188 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 27 |
+| MarketSupply,MarketWithdraw | 4 |
+| MarketSupply | 1 |
+
 
 ---
 
-### eth_mhyper_usdc
+## eth_mhyper_usdc
 
 - **Max total supply (USD)**: 142,136,439.88
 - **Total events**: 8,698
@@ -210,10 +279,17 @@
 | MarketSupply | 18.0 | -0.0355 |
 | MarketRepay | 12.0 | -0.0048 |
 | MarketWithdraw | 61.0 | 0.0053 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 3 |
+| MarketBorrow,MarketSupplyCollateral | 1 |
+
 
 ---
 
-### eth_wsteth_usdt
+## eth_wsteth_usdt
 
 - **Max total supply (USD)**: 339,293,759.74
 - **Total events**: 10,993
@@ -227,10 +303,18 @@
 | MarketSupply | 33.0 | -0.0720 |
 | MarketBorrow | 1.0 | -0.0078 |
 | MarketWithdraw | 25.0 | 0.0312 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 9 |
+| MarketSupply | 2 |
+| MarketBorrow,MarketSupply,MarketSupplyCollateral | 1 |
+
 
 ---
 
-### eth_usde_dai
+## eth_usde_dai
 
 - **Max total supply (USD)**: 154,685,204.51
 - **Total events**: 4,091
@@ -241,7 +325,7 @@
 
 ---
 
-### eth_syrupusdc_usdc
+## eth_syrupusdc_usdc
 
 - **Max total supply (USD)**: 93,767,984.11
 - **Total events**: 27,592
@@ -256,10 +340,20 @@
 | MarketRepay | 3.0 | -0.0485 |
 | MarketBorrow | 2.0 | 0.0000 |
 | MarketWithdraw | 64.0 | 0.0177 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 226 |
+| MarketSupply,MarketWithdraw | 5 |
+| MarketBorrow,MarketSupplyCollateral | 4 |
+| MarketSupply | 2 |
+| MarketBorrow,MarketSupply,MarketSupplyCollateral | 1 |
+
 
 ---
 
-### eth_weth_usdt
+## eth_weth_usdt
 
 - **Max total supply (USD)**: 614,128.00
 - **Total events**: 1,760
@@ -273,10 +367,16 @@
 | MarketSupply | 27.0 | -0.7283 |
 | MarketRepay | 4.0 | -0.0278 |
 | MarketWithdraw | 5.0 | 0.2077 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 11 |
+
 
 ---
 
-### eth_wstusr_usdc
+## eth_wstusr_usdc
 
 - **Max total supply (USD)**: 43,945,273.28
 - **Total events**: 11,842
@@ -289,10 +389,19 @@
 |-------------|-------|---------------------|
 | MarketSupply | 171.0 | -1.6309 |
 | MarketWithdraw | 18.0 | 0.9387 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 112 |
+| MarketSupply,MarketWithdraw | 12 |
+| MarketSupply | 2 |
+| MarketBorrow,MarketSupply,MarketSupplyCollateral | 1 |
+
 
 ---
 
-### eth_fxsave_usdc
+## eth_fxsave_usdc
 
 - **Max total supply (USD)**: 39,034,562.39
 - **Total events**: 9,130
@@ -307,10 +416,19 @@
 | MarketRepay | 1.0 | -0.0606 |
 | MarketWithdraw | 30.0 | 0.0201 |
 | MarketBorrow | 1.0 | 0.0296 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 72 |
+| MarketBorrow,MarketSupplyCollateral | 4 |
+| MarketSupply,MarketWithdraw | 2 |
+| MarketBorrow,MarketSupply,MarketSupplyCollateral | 1 |
+
 
 ---
 
-### eth_reusd_usdc
+## eth_reusd_usdc
 
 - **Max total supply (USD)**: 13,221,619.01
 - **Total events**: 6,101
@@ -324,10 +442,17 @@
 | MarketRepay | 1.0 | -0.2505 |
 | MarketSupply | 42.0 | -0.0605 |
 | MarketWithdraw | 19.0 | 0.0054 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 39 |
+| MarketBorrow,MarketSupplyCollateral | 1 |
+
 
 ---
 
-### eth_siusd_usdc
+## eth_siusd_usdc
 
 - **Max total supply (USD)**: 95,936,123.41
 - **Total events**: 17,138
@@ -342,10 +467,17 @@
 | MarketSupply | 91.0 | -0.0489 |
 | MarketBorrow | 1.0 | 0.0003 |
 | MarketWithdraw | 67.0 | 0.0242 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 20 |
+| MarketBorrow,MarketSupplyCollateral | 1 |
+
 
 ---
 
-### eth_stcusd_usdc
+## eth_stcusd_usdc
 
 - **Max total supply (USD)**: 71,069,966.39
 - **Total events**: 11,778
@@ -359,10 +491,19 @@
 | MarketSupply | 91.0 | -0.0590 |
 | MarketRepay | 3.0 | -0.0353 |
 | MarketWithdraw | 27.0 | 0.0104 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 28 |
+| MarketSupply,MarketWithdraw | 7 |
+| MarketBorrow,MarketSupply,MarketSupplyCollateral | 6 |
+| MarketBorrow,MarketSupplyCollateral | 2 |
+
 
 ---
 
-### eth_cbbtc_usdt
+## eth_cbbtc_usdt
 
 - **Max total supply (USD)**: 239,531,763.80
 - **Total events**: 972
@@ -374,10 +515,18 @@
 | Action Type | Count | Weighted Mean ΔUtil
 |-------------|-------|---------------------|
 | MarketSupply | 15.0 | -0.0984 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 11 |
+| MarketBorrow,MarketSupply,MarketSupplyCollateral | 1 |
+| MarketSupply,MarketWithdraw | 1 |
+
 
 ---
 
-### eth_wsrusd_usdc
+## eth_wsrusd_usdc
 
 - **Max total supply (USD)**: 100,015,819.43
 - **Total events**: 7,348
@@ -392,10 +541,18 @@
 | MarketRepay | 34.0 | -0.0180 |
 | MarketBorrow | 18.0 | 0.0183 |
 | MarketWithdraw | 8.0 | 0.0227 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 12 |
+| MarketBorrow,MarketSupplyCollateral | 4 |
+| MarketSupply | 1 |
+
 
 ---
 
-### eth_sdeusd_usdc
+## eth_sdeusd_usdc
 
 - **Max total supply (USD)**: 82,421,369.96
 - **Total events**: 14,602
@@ -411,10 +568,17 @@
 | MarketBorrow | 3.0 | 0.0005 |
 | MarketLiquidation | 2.0 | 0.0021 |
 | MarketWithdraw | 52.0 | 0.0201 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 84 |
+| MarketBorrow,MarketSupply,MarketSupplyCollateral | 4 |
+
 
 ---
 
-### eth_mapollo_usdc
+## eth_mapollo_usdc
 
 - **Max total supply (USD)**: 5,370,054.71
 - **Total events**: 470
@@ -428,10 +592,17 @@
 | MarketSupply | 5.0 | -0.1188 |
 | MarketRepay | 1.0 | -0.0560 |
 | MarketBorrow | 1.0 | 0.0217 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 4 |
+| MarketBorrow,MarketSupplyCollateral | 2 |
+
 
 ---
 
-### eth_syrupusdc_pyusd
+## eth_syrupusdc_pyusd
 
 - **Max total supply (USD)**: 30,014,924.86
 - **Total events**: 339
@@ -444,6 +615,14 @@
 |-------------|-------|---------------------|
 | MarketRepay | 1.0 | -0.0950 |
 | MarketSupply | 2.0 | -0.0926 |
+#### Top 5 Trigger Event Types
+
+| Event Type | Count |
+|------------|-------|
+| MarketWithdraw | 2 |
+| MarketBorrow,MarketSupplyCollateral | 1 |
+| MarketBorrow | 1 |
+
 
 ---
 
