@@ -8,10 +8,14 @@ def plot_user_metrics(df, fields, user_address=None, dates_range=None):
     """
     Plot time series metrics with action markers using Plotly.
     """
+    
     if user_address:
         plot_df = df[df['user_address'] == user_address].copy()
         print("User address", {user_address})
-        print("MAX DEBT", {plot_df["debt"].max()})
+        try:
+            print("MAX DEBT", {plot_df["debt"].max()})
+        except Exception as e:
+            pass
         
         
         if plot_df.empty:
@@ -19,7 +23,8 @@ def plot_user_metrics(df, fields, user_address=None, dates_range=None):
             return
     else:
         plot_df = df.copy()
-    plot_df["ltv"] = plot_df["ltv"].clip(0,1)
+    if 'ltv' in plot_df.columns:
+        plot_df["ltv"] = plot_df["ltv"].clip(0,1)
 
     if dates_range is not None:
         plot_df = plot_df[(plot_df["datetime"] >= dates_range[0]) & (plot_df["datetime"] <= dates_range[1])]
