@@ -302,7 +302,9 @@ MARKETS_HASHES = {
 # }
 
 MARKETS_HASHES = {
-    "base_cbbtc_usdc_full1": "0x9103c3b4e834476c9a62ea009ba2c884ee42e94e6e314a26f04d312434191836",
+    # "base_cbbtc_usdc_full1": "0x9103c3b4e834476c9a62ea009ba2c884ee42e94e6e314a26f04d312434191836",
+    # "eth_mF-ONE_usdc": "0xef2c308b5abecf5c8750a1aa82b47c558005feb7a03f4f8e1ad682d71ac8d0ba",
+    "eth_susde_pyusd": "0x90ef0c5a0dc7c4de4ad4585002d44e9d411d212d2f6258e94948beecf8b4c0d5",
 }
 
 if '-raw' in sys.argv:
@@ -313,7 +315,7 @@ if '-raw' in sys.argv:
             start_date_str="2022-01-01 00:00:00",
             end_date_str="2027-02-01 00:00:00",
             market=market,
-            csv_file_path=f"./data/markets_raw/{market}6.csv",
+            csv_file_path=f"./data/markets_raw/{market}.csv",
         )
         # break
 
