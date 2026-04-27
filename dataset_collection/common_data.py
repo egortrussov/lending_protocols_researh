@@ -95,7 +95,7 @@ with open("/Users/yegortrussov/Documents/ml/lending_protocols/dataset_collection
     markets_meta = json.load(f)
 for file in os.listdir(raw_path):
     md = pd.read_csv(raw_path + "/" + file)["market_address"].unique()[0]
-    print(md in markets_meta.keys(), )
+    print(file.split("/")[-1], md in markets_meta.keys(), md)
     if md not in markets_meta.keys():
       markets_list.append(
           md

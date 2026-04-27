@@ -301,10 +301,35 @@ MARKETS_HASHES = {
 
 # }
 
+
+# 'eth_wbtc_usdc', 'base_wbtc_usdt', 'eth_cbbtc_usdc',
+# 'eth_wbtc_usdt', "eth_wsteth_usdt", 'eth_weth_usdt', 'eth_cbbtc_usdt',
+
 MARKETS_HASHES = {
     # "base_cbbtc_usdc_full1": "0x9103c3b4e834476c9a62ea009ba2c884ee42e94e6e314a26f04d312434191836",
     # "eth_mF-ONE_usdc": "0xef2c308b5abecf5c8750a1aa82b47c558005feb7a03f4f8e1ad682d71ac8d0ba",
-    "eth_susde_pyusd": "0x90ef0c5a0dc7c4de4ad4585002d44e9d411d212d2f6258e94948beecf8b4c0d5",
+    # "eth_susde_pyusd": "0x90ef0c5a0dc7c4de4ad4585002d44e9d411d212d2f6258e94948beecf8b4c0d5",
+
+    "base_cbeth_usdc": "0x0ca10126f6c94cbd9cf0a48cc9516ae5e3dec5aa68303e6d988ee37c5149bf0d",
+    # "base_wbtc_usdc": "0x3a85e619751152991742810df6ec69ce473daef99e28a64ab2340d7b7ccfee49",
+    # "base_weth_usdc": "0x8793cf302b8ffd655ab97bd1c695dbd967807e8367a65cb2f4edaf1380ba1bda",
+
+    # "eth_wbtc_usdt": "0xa921ef34e2fc7a27ccc50ae7e4b154e16c9799d3387076c421423ef52ac4df99",
+}
+
+
+MARKETS_HASHES = { # only new logic 
+    # "eth_wbtc_usdc": "0x3a85e619751152991742810df6ec69ce473daef99e28a64ab2340d7b7ccfee49",
+    # "eth_cbbtc_usdc": "0x64d65c9a2d91c36d56fbc42d69e979335320169b3df63bf92789e2c8883fcc64",
+
+    # "base_weth_usdc":"0x8793cf302b8ffd655ab97bd1c695dbd967807e8367a65cb2f4edaf1380ba1bda",
+    # "base_wsteth_usdc":"0xb323495f7e4148be5643a4ea4a8221eef163e4bccfdedc2a6f4696baacbc86cc",
+    # "base_wsteth_usdt":
+    "base_wbtc_usdt": "",
+    "eth_wbtc_usdt": "",
+    "eth_wsteth_usdt": "",
+    "eth_weth_usdt": "",
+    "eth_cbbtc_usdt": "",
 }
 
 if '-raw' in sys.argv:
