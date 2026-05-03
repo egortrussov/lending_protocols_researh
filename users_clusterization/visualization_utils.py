@@ -344,3 +344,117 @@ def plot_market_features(market_df, fields, dates_range=None, y_ranges=None):
             fig.update_yaxes(range=y_ranges[fields[1]], secondary_y=True)
     
     fig.show()
+
+
+
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import pandas as pd
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import pandas as pd
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import pandas as pd
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import pandas as pd
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import pandas as pd
+import numpy as np
+
+def plot_market_features_with_bars(market_df, line_field, bar_fields, clip_values=None, dates_range=None,
+                                   line_on_secondary=True, y_ranges=None):
+    """
+    Plot a line and bar fields. For each bar field, positive values are green upward bars,
+    negative values are red downward bars.
+    """
+    df = market_df.copy()
+    if 'datetime' not in df.columns:
+        if 'timestamp' in df.columns:
+            df['datetime'] = pd.to_datetime(df['timestamp'], unit='s')
+        else:
+            raise ValueError("DataFrame must have a 'datetime' or 'timestamp' column.")
+    df = df.sort_values('datetime')
+
+    if dates_range is not None:
+        start, end = pd.to_datetime(dates_range[0]), pd.to_datetime(dates_range[1])
+        df = df[(df['datetime'] >= start) & (df['datetime'] <= end)]
+
+    # Apply y_ranges for individual fields (clipping and axis limits)
+    if y_ranges is not None:
+        for field, (low, high) in y_ranges.items():
+            if field in df.columns:
+                df[field] = df[field].clip(low, high)
+
+    # Determine primary y-axis range for bars
+    if clip_values is not None:
+        neg_limit, pos_limit = clip_values
+        primary_range = [neg_limit, pos_limit]
+    else:
+        # Compute min and max over all bar fields
+        min_val = 0
+        max_val = 0
+        for field in bar_fields:
+            if field in df.columns:
+                min_val = min(min_val, df[field].min())
+                max_val = max(max_val, df[field].max())
+        primary_range = [min_val, max_val]
+
+    # Create figure
+    fig = make_subplots(specs=[[{"secondary_y": line_on_secondary}]])
+
+    # Add bar traces
+    for field in bar_fields:
+        if field not in df.columns:
+            continue
+        # For each field, create a single bar trace with conditional colors
+        colors = ['green' if v >= 0 else 'red' for v in df[field]]
+        fig.add_trace(
+            go.Bar(x=df['datetime'], y=df[field],
+                   name=field,
+                   marker_color=colors,
+                   opacity=0.7,
+                   base=0),
+            secondary_y=False
+        )
+
+    # Add line trace
+    fig.add_trace(
+        go.Scatter(x=df['datetime'], y=df[line_field],
+                   mode='lines',
+                   name=line_field,
+                   line=dict(color='blue', width=2)),
+        secondary_y=line_on_secondary
+    )
+
+    # Layout
+    title = f"Market Features: {line_field} (line) + {', '.join(bar_fields)} (bars)"
+    fig.update_layout(
+        title=title,
+        hovermode='x unified',
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+        template="plotly_white",
+        barmode='overlay'
+    )
+
+    fig.update_xaxes(title_text="Time", tickformat="%Y-%m-%d %H:%M")
+    
+    # Set y-axis ranges
+    fig.update_yaxes(range=primary_range, secondary_y=False)
+    
+    if y_ranges is not None and line_field in y_ranges:
+        axis_range = y_ranges[line_field]
+        if line_on_secondary:
+            fig.update_yaxes(range=axis_range, secondary_y=True)
+        else:
+            fig.update_yaxes(range=axis_range, secondary_y=False)
+
+    fig.update_yaxes(title_text="Bar values", secondary_y=False)
+    if line_on_secondary:
+        fig.update_yaxes(title_text=line_field, secondary_y=True)
+    else:
+        fig.update_yaxes(title_text=f"{line_field} / Bar values", secondary_y=False)
+
+    fig.show()

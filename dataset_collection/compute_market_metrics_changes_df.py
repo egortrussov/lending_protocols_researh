@@ -248,7 +248,7 @@ def calculate_metrics(df, irm_history, asset_data, loan_asset_data, use_collater
                 total_borrow -= amount
             elif row['type'] == 'MarketLiquidation':
                 total_borrow -= amount
-                total_supply += amount
+                # total_supply += amount
             
             i += 1
         

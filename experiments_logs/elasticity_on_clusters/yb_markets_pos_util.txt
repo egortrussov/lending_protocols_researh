@@ -1,0 +1,139 @@
+==========================================================================================
+  eth_usr_usdc
+==========================================================================================
+  LIN  | Train R²=0.0302  Test R²=-0.0027  |  util_gap p=0.0000  |  Sig: delta_utilization_lag72: coef=0.067 p=0.022  |  util_gap: coef=0.549 p=0.000  |  util_gap_consecutive_bins_inter: coef=-0.003 p=0.001
+  XGB  | Train R²=0.0400  Test R²=-0.0025  |  Top: consecutive_bins:0.0  util_gap:0.0  delta_utilization_lag72:0.0  util_gap_consecutive_bins_inter:0.0  delta_utilization_lag6:0.0
+  RF   | Train R²=0.1075  Test R²=-0.0032  |  Top: util_gap:0.188  delta_utilization_lag18:0.087  consecutive_bins:0.087  util_gap_consecutive_bins_inter:0.086  delta_borrow_rate_lag18:0.085
+
+==========================================================================================
+  eth_wsteth_usdc
+==========================================================================================
+  LIN  | Train R²=0.0140  Test R²=0.0328  |  util_gap p=0.0000  |  Sig: delta_utilization_lag6: coef=0.073 p=0.000  |  delta_utilization_lag12: coef=0.119 p=0.000  |  delta_utilization_lag72: coef=0.044 p=0.004
+  XGB  | Train R²=0.1289  Test R²=0.1082  |  Top: delta_utilization_lag12:0.0  delta_borrow_rate_lag72:0.0  util_gap:0.0  consecutive_bins:0.0  util_gap_consecutive_bins_inter:0.0
+  RF   | Train R²=0.0875  Test R²=0.0971  |  Top: util_gap:0.178  delta_utilization_lag18:0.155  delta_borrow_rate_lag18:0.125  consecutive_bins:0.121  util_gap_consecutive_bins_inter:0.094
+
+==========================================================================================
+  eth_rlp_usdc
+==========================================================================================
+  LIN  | Train R²=0.0172  Test R²=0.0169  |  util_gap p=0.0000  |  Sig: delta_utilization_lag6: coef=0.078 p=0.000  |  delta_utilization_lag12: coef=0.140 p=0.000  |  delta_utilization_lag18: coef=0.068 p=0.001
+  XGB  | Train R²=0.3418  Test R²=0.0114  |  Top: delta_borrow_rate_lag72:0.0  delta_borrow_rate_lag36:0.0  util_gap_consecutive_bins_inter:0.0  delta_utilization_lag72:0.0  consecutive_bins:0.0
+  RF   | Train R²=0.2518  Test R²=0.0271  |  Top: util_gap:0.169  delta_borrow_rate_lag36:0.111  delta_utilization_lag36:0.108  util_gap_consecutive_bins_inter:0.099  consecutive_bins:0.092
+
+==========================================================================================
+  eth_usd0++_usdc
+==========================================================================================
+  LIN  | Train R²=0.0153  Test R²=-0.0398  |  util_gap p=0.0000  |  Sig: delta_collateral_price_lag18: coef=0.848 p=0.023  |  util_gap: coef=0.148 p=0.000
+  XGB  | Train R²=0.2141  Test R²=-0.0959  |  Top: delta_collateral_price_lag12:0.0  util_gap_consecutive_bins_inter:0.0  consecutive_bins:0.0  delta_utilization_lag72:0.0  util_gap:0.0
+  RF   | Train R²=0.2605  Test R²=-0.0719  |  Top: util_gap:0.262  delta_collateral_price_lag12:0.166  util_gap_consecutive_bins_inter:0.130  consecutive_bins:0.084  delta_utilization_lag6:0.039
+
+==========================================================================================
+  eth_fxsave_usdc
+==========================================================================================
+  LIN  | Train R²=0.0171  Test R²=-0.0018  |  util_gap p=0.0000  |  Sig: delta_utilization_lag12: coef=0.243 p=0.000  |  delta_borrow_rate_lag12: coef=-0.095 p=0.000  |  delta_borrow_rate_lag18: coef=0.068 p=0.002
+  XGB  | Train R²=0.0280  Test R²=0.0099  |  Top: consecutive_bins:0.0  util_gap_consecutive_bins_inter:0.0  util_gap:0.0  delta_utilization_lag12:0.0  delta_utilization_lag6:0.0
+  RF   | Train R²=0.2096  Test R²=-0.0510  |  Top: delta_utilization_lag12:0.274  delta_collateral_price_lag6:0.098  util_gap:0.084  util_gap_consecutive_bins_inter:0.073  delta_borrow_rate_lag6:0.067
+
+==========================================================================================
+  eth_mapollo_usdc
+==========================================================================================
+  LIN  | Train R²=0.0059  Test R²=-0.0139  |  util_gap p=0.1488  |  Sig: delta_collateral_price_lag12: coef=15.565 p=0.000
+  XGB  | Train R²=0.8512  Test R²=-0.7055  |  Top: util_gap:0.0  consecutive_bins:0.0  util_gap_consecutive_bins_inter:0.0  delta_utilization_lag72:0.0  delta_borrow_rate_lag72:0.0
+  RF   | Train R²=0.0642  Test R²=0.0243  |  Top: util_gap_consecutive_bins_inter:0.387  consecutive_bins:0.294  util_gap:0.199  delta_utilization_lag12:0.064  delta_borrow_rate_lag12:0.045
+
+==========================================================================================
+  eth_wsrusd_usdc
+==========================================================================================
+  LIN  | Train R²=0.0382  Test R²=-0.6723  |  util_gap p=0.1889  |  Sig: delta_collateral_price_lag72: coef=1.964 p=0.005  |  delta_utilization_lag12: coef=0.313 p=0.012  |  delta_borrow_rate_lag12: coef=-0.256 p=0.027
+  XGB  | Train R²=0.2791  Test R²=-0.6714  |  Top: delta_collateral_price_lag72:0.0  delta_utilization_lag72:0.0  delta_collateral_price_lag18:0.0  delta_borrow_rate_lag72:0.0  delta_borrow_rate_lag18:0.0
+  RF   | Train R²=0.1465  Test R²=-0.5046  |  Top: util_gap_consecutive_bins_inter:0.177  consecutive_bins:0.132  util_gap:0.106  delta_collateral_price_lag72:0.095  delta_utilization_lag12:0.079
+
+==========================================================================================
+  eth_syrupusdc_pyusd
+==========================================================================================
+  LIN  | Train R²=0.0163  Test R²=-0.0346  |  util_gap p=0.1397  |  Sig: 
+  XGB  | Train R²=0.4089  Test R²=-0.0462  |  Top: consecutive_bins:0.0  util_gap:0.0  util_gap_consecutive_bins_inter:0.0
+  RF   | Train R²=0.0960  Test R²=-0.0340  |  Top: consecutive_bins:0.515  util_gap_consecutive_bins_inter:0.345  util_gap:0.140  delta_collateral_price_lag12:0.000  delta_borrow_rate_lag72:0.000
+
+==========================================================================================
+  eth_susde_pyusd
+==========================================================================================
+  LIN  | Train R²=0.0398  Test R²=-1.1914  |  util_gap p=0.0000  |  Sig: util_gap: coef=0.351 p=0.000  |  consecutive_bins: coef=0.000 p=0.001  |  util_gap_consecutive_bins_inter: coef=-0.003 p=0.000
+  XGB  | Train R²=0.3287  Test R²=-0.0388  |  Top: util_gap:0.0  consecutive_bins:0.0  util_gap_consecutive_bins_inter:0.0  delta_utilization_lag12:0.0  delta_collateral_price_lag72:0.0
+  RF   | Train R²=0.0945  Test R²=-0.5231  |  Top: consecutive_bins:0.416  util_gap_consecutive_bins_inter:0.288  util_gap:0.270  delta_borrow_rate_lag6:0.006  delta_utilization_lag12:0.005
+
+==========================================================================================
+  eth_stcusd_usdc
+==========================================================================================
+  LIN  | Train R²=0.0198  Test R²=-0.0639  |  util_gap p=0.0303  |  Sig: delta_utilization_lag18: coef=0.135 p=0.001  |  delta_utilization_lag36: coef=0.268 p=0.000  |  util_gap: coef=0.114 p=0.030
+  XGB  | Train R²=0.1019  Test R²=0.0167  |  Top: delta_borrow_rate_lag36:0.1  util_gap_consecutive_bins_inter:0.0  delta_utilization_lag6:0.0  delta_utilization_lag72:0.0  consecutive_bins:0.0
+  RF   | Train R²=0.1652  Test R²=-0.1017  |  Top: delta_borrow_rate_lag36:0.143  delta_utilization_lag36:0.135  util_gap_consecutive_bins_inter:0.130  util_gap:0.115  consecutive_bins:0.102
+
+==========================================================================================
+  eth_usde_dai
+==========================================================================================
+  LIN  | Train R²=0.0003  Test R²=0.0010  |  util_gap p=0.3431  |  Sig: 
+  XGB  | Train R²=-0.0000  Test R²=-0.0001  |  Top: 
+  RF   | Train R²=0.0721  Test R²=-0.1006  |  Top: util_gap_consecutive_bins_inter:0.358  consecutive_bins:0.273  delta_borrow_rate_lag72:0.114  delta_utilization_lag72:0.112  util_gap:0.109
+
+==========================================================================================
+  eth_mhyper_usdc
+==========================================================================================
+  LIN  | Train R²=0.0210  Test R²=0.0394  |  util_gap p=0.0000  |  Sig: util_gap: coef=0.235 p=0.000  |  consecutive_bins: coef=0.000 p=0.000  |  util_gap_consecutive_bins_inter: coef=-0.002 p=0.000
+  XGB  | Train R²=0.8065  Test R²=0.0425  |  Top: consecutive_bins:0.0  util_gap:0.0  util_gap_consecutive_bins_inter:0.0  delta_utilization_lag6:0.0  delta_borrow_rate_lag6:0.0
+  RF   | Train R²=0.7049  Test R²=-0.1413  |  Top: consecutive_bins:0.431  util_gap:0.238  util_gap_consecutive_bins_inter:0.128  delta_borrow_rate_lag6:0.101  delta_borrow_rate_lag12:0.038
+
+==========================================================================================
+  eth_syrupusdc_usdc
+==========================================================================================
+  LIN  | Train R²=0.0420  Test R²=-0.0810  |  util_gap p=0.0000  |  Sig: delta_utilization_lag6: coef=0.195 p=0.000  |  delta_borrow_rate_lag6: coef=-0.099 p=0.001  |  util_gap: coef=0.458 p=0.000
+  XGB  | Train R²=0.6227  Test R²=-5.9263  |  Top: util_gap:0.2  delta_collateral_price_lag72:0.2  delta_borrow_rate_lag72:0.1  delta_collateral_price_lag6:0.1  delta_utilization_lag36:0.1
+  RF   | Train R²=0.4657  Test R²=-1.0925  |  Top: util_gap:0.177  util_gap_consecutive_bins_inter:0.163  delta_borrow_rate_lag72:0.153  delta_utilization_lag18:0.083  delta_utilization_lag6:0.070
+
+==========================================================================================
+  eth_wstusr_usdc
+==========================================================================================
+  LIN  | Train R²=0.0058  Test R²=-0.3636  |  util_gap p=0.0000  |  Sig: delta_collateral_price_lag12: coef=-54.944 p=0.000  |  util_gap: coef=0.473 p=0.000  |  util_gap_consecutive_bins_inter: coef=-0.004 p=0.030
+  XGB  | Train R²=0.0398  Test R²=-0.0351  |  Top: util_gap:4.0  delta_utilization_lag6:2.0  util_gap_consecutive_bins_inter:0.7  consecutive_bins:0.3  delta_borrow_rate_lag6:0.3
+  RF   | Train R²=0.0972  Test R²=-0.3121  |  Top: util_gap:0.318  util_gap_consecutive_bins_inter:0.299  delta_borrow_rate_lag72:0.090  delta_collateral_price_lag12:0.086  delta_borrow_rate_lag12:0.069
+
+==========================================================================================
+  eth_slvlusd_usdc
+==========================================================================================
+  LIN  | Train R²=0.0107  Test R²=0.0072  |  util_gap p=0.0000  |  Sig: util_gap: coef=0.996 p=0.000  |  util_gap_consecutive_bins_inter: coef=-0.015 p=0.017
+  XGB  | Train R²=0.0235  Test R²=0.0069  |  Top: util_gap_consecutive_bins_inter:0.0  delta_utilization_lag36:0.0  delta_utilization_lag72:0.0  delta_borrow_rate_lag36:0.0  delta_borrow_rate_lag72:0.0
+  RF   | Train R²=0.0719  Test R²=-0.0086  |  Top: util_gap:0.355  util_gap_consecutive_bins_inter:0.191  consecutive_bins:0.129  delta_utilization_lag6:0.064  delta_borrow_rate_lag6:0.057
+
+==========================================================================================
+  eth_csusdl_usdc
+==========================================================================================
+  LIN  | Train R²=0.0854  Test R²=-50.3693  |  util_gap p=0.0000  |  Sig: delta_collateral_price_lag72: coef=18.092 p=0.000  |  delta_utilization_lag6: coef=0.133 p=0.000  |  delta_borrow_rate_lag18: coef=0.123 p=0.000
+  XGB  | Train R²=0.2928  Test R²=-36.9038  |  Top: util_gap_consecutive_bins_inter:0.2  delta_utilization_lag12:0.2  delta_borrow_rate_lag18:0.1  delta_collateral_price_lag72:0.1  util_gap:0.1
+  RF   | Train R²=0.1991  Test R²=-4.7590  |  Top: util_gap:0.352  util_gap_consecutive_bins_inter:0.102  consecutive_bins:0.099  delta_collateral_price_lag72:0.066  delta_utilization_lag6:0.064
+
+==========================================================================================
+  eth_mF-ONE_usdc
+==========================================================================================
+  LIN  | Train R²=0.0157  Test R²=-0.0899  |  util_gap p=0.1347  |  Sig: consecutive_bins: coef=-0.000 p=0.000  |  util_gap_consecutive_bins_inter: coef=0.003 p=0.000
+  XGB  | Train R²=0.0383  Test R²=-0.0139  |  Top: consecutive_bins:2.7  delta_utilization_lag72:1.9  util_gap_consecutive_bins_inter:1.2  delta_borrow_rate_lag72:1.2  delta_utilization_lag12:0.6
+  RF   | Train R²=0.2218  Test R²=0.0042  |  Top: util_gap:0.391  util_gap_consecutive_bins_inter:0.288  consecutive_bins:0.206  delta_borrow_rate_lag12:0.028  delta_utilization_lag12:0.020
+
+==========================================================================================
+  eth_reusd_usdc
+==========================================================================================
+  LIN  | Train R²=0.0164  Test R²=-0.0777  |  util_gap p=0.0227  |  Sig: delta_collateral_price_lag36: coef=-6.572 p=0.000  |  delta_utilization_lag6: coef=0.188 p=0.005  |  delta_borrow_rate_lag36: coef=-0.105 p=0.039
+  XGB  | Train R²=0.1796  Test R²=0.0109  |  Top: delta_collateral_price_lag36:0.7  delta_utilization_lag36:0.5  delta_borrow_rate_lag36:0.3  util_gap_consecutive_bins_inter:0.2  util_gap:0.1
+  RF   | Train R²=0.1086  Test R²=-0.0737  |  Top: delta_collateral_price_lag36:0.149  delta_borrow_rate_lag36:0.139  util_gap_consecutive_bins_inter:0.138  consecutive_bins:0.128  util_gap:0.120
+
+==========================================================================================
+  eth_siusd_usdc
+==========================================================================================
+  LIN  | Train R²=0.0028  Test R²=-0.0978  |  util_gap p=0.1718  |  Sig: consecutive_bins: coef=0.000 p=0.003  |  util_gap_consecutive_bins_inter: coef=-0.001 p=0.035
+  XGB  | Train R²=0.7063  Test R²=-0.8484  |  Top: util_gap:0.0  delta_utilization_lag12:0.0  consecutive_bins:0.0  delta_borrow_rate_lag12:0.0  delta_utilization_lag6:0.0
+  RF   | Train R²=0.4981  Test R²=-1.6547  |  Top: consecutive_bins:0.463  util_gap_consecutive_bins_inter:0.147  util_gap:0.141  delta_borrow_rate_lag12:0.054  delta_collateral_price_lag36:0.054
+
+==========================================================================================
+  eth_sdeusd_usdc
+==========================================================================================
+  LIN  | Train R²=0.0006  Test R²=-0.2860  |  util_gap p=0.0243  |  Sig: util_gap: coef=0.144 p=0.024
+  XGB  | Train R²=0.0902  Test R²=-0.0055  |  Top: util_gap_consecutive_bins_inter:33.1  consecutive_bins:3.0  util_gap:2.4  delta_utilization_lag72:0.7  delta_collateral_price_lag18:0.0
+  RF   | Train R²=0.0793  Test R²=-0.0002  |  Top: util_gap_consecutive_bins_inter:0.311  util_gap:0.281  consecutive_bins:0.223  delta_utilization_lag18:0.020  delta_borrow_rate_lag6:0.019
