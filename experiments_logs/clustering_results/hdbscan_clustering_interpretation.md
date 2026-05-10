@@ -3,7 +3,7 @@
 
 | Cluster | Size | Label | Defining Characteristics (z > 2) |
 |---------|------|-------|-----------------------------------|
-| **0** | 188 | **Multi‑asset/multi‑market active traders** | `n_loan_asset_types` (+12.4), `n_markets` (+11.6), `n_collateral_types` (+8.8), `max_concurrent_positions` (+3.4), `was_active_during_spike` (+3.7) – operate across many markets and asset types simultaneously, frequently active during spikes. |
+| **0** | 188 | **Multi‑asset/multi‑market active traders** | `n_loan_assets` (+12.4), `n_markets` (+11.6), `n_collaterals` (+8.8), `max_concurrent_positions` (+3.4), `was_active_during_spike` (+3.7) – operate across many markets and asset types simultaneously, frequently active during spikes. |
 | **1** | 191 | **Ultra‑short‑term high‑concurrency flippers** | `max_concurrent_positions` (+11.7), `n_positions` (+9.0), `avg_leverage_factor` (+4.4), `overlap_ratio` (–2.0) – open/close dozens of positions very quickly (average duration ~0.4 h), highly leveraged, within a single market. |
 | **2** | 177 | **Dominant whale borrowers** | `debtors_rank_ever` (+12.8), `mean_max_share` (+8.7), `was_active_during_spike` (+4.2), `total_spikes` (+3.8), high debt ($222k median) – consistently top borrowers, heavily involved in spikes, control a large share of debt in their markets. |
 | **3** | 544 | **High‑LTV spike responders** | `prop_high_ltv_open` (+3.9), `was_active_during_spike` (+4.2), `total_spikes` (+2.6), `median_max_ltv` (+1.6) – open most positions at high LTV (>0.8) and react to nearly every spike. |

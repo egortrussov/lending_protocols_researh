@@ -36,7 +36,6 @@ MARKETS_HASHES = {
 # }
 
 
-
 def query_aave_graphql(query):
     headers = {
         'Content-Type': 'application/json',
@@ -340,18 +339,45 @@ MARKETS_HASHES = { # only new logic
     "eth_wsteth_usdc": "0xb323495f7e4148be5643a4ea4a8221eef163e4bccfdedc2a6f4696baacbc86cc",
 }
 
-YB_TOKENS = [
-    'eth_usr_usdc', 'eth_wsteth_usdc', 'eth_rlp_usdc',
-    'eth_usd0++_usdc', 'eth_fxsave_usdc', 'eth_mapollo_usdc',
-    'eth_wsrusd_usdc', 'eth_syrupusdc_pyusd', 'eth_susde_pyusd',
-    'eth_stcusd_usdc', 'eth_usde_dai', 'eth_mhyper_usdc', 'eth_syrupusdc_usdc',
-    'eth_wstusr_usdc','eth_slvlusd_usdc','eth_csusdl_usdc', 'eth_mF-ONE_usdc', 'eth_reusd_usdc',
-    'eth_siusd_usdc', 'eth_sdeusd_usdc'
-]
+# YB_TOKENS = [
+#     'eth_usr_usdc', 'eth_wsteth_usdc', 'eth_rlp_usdc',
+#     'eth_usd0++_usdc', 'eth_fxsave_usdc', 'eth_mapollo_usdc',
+#     'eth_wsrusd_usdc', 'eth_syrupusdc_pyusd', 'eth_susde_pyusd',
+#     'eth_stcusd_usdc', 'eth_usde_dai', 'eth_mhyper_usdc', 'eth_syrupusdc_usdc',
+#     'eth_wstusr_usdc','eth_slvlusd_usdc','eth_csusdl_usdc', 'eth_mF-ONE_usdc', 'eth_reusd_usdc',
+#     'eth_siusd_usdc', 'eth_sdeusd_usdc'
+# ]
+
+# MARKETS_HASHES = {
+#     k: "" for k in YB_TOKENS
+# }
 
 MARKETS_HASHES = {
-    k: "" for k in YB_TOKENS
+    # "eth_PT-USR-4SEP2025_usdc": "0xe161f2204b2d5a356a91c324e1a77d791da217fdec6b52a84b5b9e0b56516413",
+    # "eth_PT-RLP-4DEC2025_usdc": "0xa02ad0cf521ba5e5b20d1bcb98043eb091807e2b3bf26df5aad1ad154a3b8d45",
+    # "eth_PT-sNUSD-4JUN2026_usdc": "0xb62aac664f81d19f21a158aa0373967ef60fd1ac8de4a9091bd225c007973ca6",
+    # "eth_PT-USD0++-26JUN2025_usdc": "0x19ab5f7fa9a014d6e5c07384ac34f56e517f449c75f3c9cdc1e0ccd06313419b",
+    # "eth_PT-RLP-9APR2026_usdc": "0x1cfdc0154ae6b9f1887a8250f2582d55606e1a2008e65108fb83dd50a928593e",
+    # "eth_PT-USD0++-26JUN2025_usdc": "0x12e703583b8a2a46a85d9d383b6156bbcf73db6b47a6f97c38771c56dd1bdd6c",
+    # "eth_PT-USDe-27NOV2025_usdc": "0x534e7046c3aebaa0c6c363cdbeb9392fc87af71cc16862479403a198fe04b206",
+    # "eth_PT-mHYPER-29JAN2026_usdc": "0xfa5b0b24e68c993c1df02bcd6c1c774a9d3e4b311967d94ad1f2d0fee8f82a86",
+    # "eth_PT-lvlUSD-25SEP2025_usdc": "0xe61a903174169e4897669e9bc4419eb7582b36d1a3d3df633dccab88da6e2ccd",
+    # "eth_PT-USR-4DEC2025_usdc": "0x6920dba94e92cec814cb2be2d5817e6d959ca750c71bd6973402c8a2372ea21b",
+    # "eth_PT-USDe-27NOV2025_usdc": "0x89c30faadb4d3e748583fe5862b257a9d408f9b64d8e79d4d94b3bd8f2592c1c",
+    # "eth_PT-mHYPER-30APR2026_usdc": "0xca432a8b0f33541cfe164d388823d05b607db43b690d4856f343eec3b42402c0",
+    # "eth_PT-csUSDL-30OCT2025_usdc": "0xee8b6a54d60c18af9085cef5f90fb3de887f4ebe3f84e21c8222740c1de6d79e",
+    # "eth_PT-syrupUSDC-18DEC2025_usdc": "0x5223ae739e3adcdb665919ac249983914aabb1b2991137f243bde79e65b87bc6",
+    # "eth_PT-USDe-5FEB2026_usdc": "0x32a8b98a4c4b9f3b56798e6a7593799f5e1c33108302eacf981efa108fc4b131",
+    # "eth_PT-RLP-4DEC2025_usdc": "0xb5e223dd87e4baea98cbf15412b6c6b93504a9affb095f0c136519abe2df184e",
+    # "eth_PT-USDe-26DEC2024_usdc": "0x0f7d9d8eb89097a0addacda1b3fe12fb7ce1ee3a6fd9059d9e67395389005819",
 }
+
+
+MARKETS_HASHES = {
+    "eth_susde_usdt": "0xdc5333039bcf15f1237133f74d5806675d83d9cf19cfd4cfdd9be674842651bf",
+    "eth_susde_pyusd": "0x90ef0c5a0dc7c4de4ad4585002d44e9d411d212d2f6258e94948beecf8b4c0d5",
+}  
+
 
 if '-raw' in sys.argv:
     print("Fetching raw parameters...")

@@ -196,8 +196,8 @@ def plot_market_features(market_df, fields, dates_range=None, y_ranges=None):
     df = df.sort_values('datetime')
     
     if dates_range is not None:
-        start, end = pd.to_datetime(dates_range[0]), pd.to_datetime(dates_range[1])
-        df = df[(df['datetime'] >= start) & (df['datetime'] <= end)]
+        # start, end = pd.to_datetime(dates_range[0]), pd.to_datetime(dates_range[1])
+        df = df[(df['datetime'] >= dates_range[0]) & (df['datetime'] <= dates_range[1])]
     
     fig = make_subplots(specs=[[{"secondary_y": len(fields) > 1}]])
     colors = px.colors.qualitative.Plotly
